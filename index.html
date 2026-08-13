@@ -13,9 +13,6 @@
     --muted: #5b6b66;
     --accent: #0f8a5f;
     --stroke: #dde5e2;
-    --flag-bg: #fff4d6;
-    --flag-text: #6b4c00;
-    --flag-stroke: #e8c86a;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -25,9 +22,6 @@
       --muted: #97a8a2;
       --accent: #34d399;
       --stroke: #26302e;
-      --flag-bg: #3a2f10;
-      --flag-text: #ffe08a;
-      --flag-stroke: #6b5720;
     }
   }
   * { box-sizing: border-box; }
@@ -59,15 +53,29 @@
   }
   .box p:first-child { margin-top: 0; }
   .box p:last-child { margin-bottom: 0; }
-  .flag {
-    background: var(--flag-bg); color: var(--flag-text);
-    border: 1px solid var(--flag-stroke); border-radius: 6px;
-    padding: 2px 8px; font-weight: 700; white-space: nowrap;
-  }
   .table-scroll { overflow-x: auto; margin: 20px 0; }
   table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 0.95rem; }
   th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--stroke); vertical-align: top; }
   th { font-weight: 700; background: var(--surface); }
+  @media (max-width: 620px) {
+    /* Stack each row into a card. A horizontally scrolling table hides the
+       'Why' column behind a swipe, and that column is the substance. */
+    .table-scroll { overflow-x: visible; }
+    table { min-width: 0; }
+    thead { display: none; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    tr {
+      border: 1px solid var(--stroke); border-radius: 12px;
+      background: var(--surface); padding: 6px 0; margin-bottom: 12px;
+    }
+    td { border: 0; padding: 8px 14px; }
+    td + td::before {
+      content: attr(data-label);
+      display: block; margin-bottom: 2px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted);
+    }
+  }
   footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--stroke); color: var(--muted); font-size: 0.9rem; }
 </style>
 </head>
@@ -76,7 +84,7 @@
 
 <header>
   <h1>Wasla — Privacy Policy</h1>
-  <p class="meta">Last updated: <span class="flag">[PUBLICATION DATE]</span> &middot; Applies to the Wasla iOS app</p>
+  <p class="meta">Last updated: 13 August 2026 &middot; Applies to the Wasla iOS app</p>
 </header>
 
 <p class="lede">
@@ -98,12 +106,12 @@
 
 <h2>Who we are</h2>
 <p>
-  <span class="flag">[WaslaApp]</span> (&ldquo;Wasla&rdquo;, &ldquo;we&rdquo;)
-  is the data controller for the personal data described here.
+  WaslaApp (&ldquo;Wasla&rdquo;, &ldquo;we&rdquo;) is the data controller for the personal
+  data described here.
 </p>
 <ul>
   <li><strong>Privacy contact:</strong> <a href="mailto:WaslaSupport@proton.me">WaslaSupport@proton.me</a></li>
-  <li><strong>Postal address:</strong> <span class="flag">[Khalifa-City, AbuDhabi, UAE]</span></li>
+  <li><strong>Postal address:</strong> Khalifa City, Abu Dhabi, United Arab Emirates</li>
 </ul>
 <p>
   This policy is written to meet UAE Federal Decree-Law No. 45 of 2021 on the
@@ -190,33 +198,33 @@
   <tbody>
     <tr>
       <td><strong>Your profile</strong></td>
-      <td>Anonymous ID, display name (only if you signed in), home emirate if you set one, a contribution-quality score, Pro status</td>
-      <td>To attach your settings and contributions to you, and to weight community data sensibly</td>
+      <td data-label="Examples">Anonymous ID, display name (only if you signed in), home emirate if you set one, a contribution-quality score, Pro status</td>
+      <td data-label="Why">To attach your settings and contributions to you, and to weight community data sensibly</td>
     </tr>
     <tr>
       <td><strong>Your vehicle</strong></td>
-      <td>Make, model, connector types, battery size, colour</td>
-      <td>To only ever show chargers your car can actually use. We do not ask for a number plate, VIN or any registration document.</td>
+      <td data-label="Examples">Make, model, connector types, battery size, colour</td>
+      <td data-label="Why">To only ever show chargers your car can actually use. We do not ask for a number plate, VIN or any registration document.</td>
     </tr>
     <tr>
       <td><strong>Community contributions</strong></td>
-      <td>Occupancy check-ins, star ratings, &ldquo;couldn't get access&rdquo; votes, fault reports, parking-level notes</td>
-      <td>This is what keeps the data honest for other drivers</td>
+      <td data-label="Examples">Occupancy check-ins, star ratings, &ldquo;couldn't get access&rdquo; votes, fault reports, parking-level notes</td>
+      <td data-label="Why">This is what keeps the data honest for other drivers</td>
     </tr>
     <tr>
       <td><strong>Charging sessions</strong></td>
-      <td>Which charger, start and end time, estimated energy and cost</td>
-      <td>Your own charging history and spend analytics (a Pro feature). Visible only to you.</td>
+      <td data-label="Examples">Which charger, start and end time, estimated energy and cost</td>
+      <td data-label="Why">Your own charging history and spend analytics (a Pro feature). Visible only to you.</td>
     </tr>
     <tr>
       <td><strong>Saved preferences</strong></td>
-      <td>Favourites, filter presets, saved trips</td>
-      <td>So the app remembers your choices</td>
+      <td data-label="Examples">Favourites, filter presets, saved trips</td>
+      <td data-label="Why">So the app remembers your choices</td>
     </tr>
     <tr>
       <td><strong>Purchase record</strong></td>
-      <td>Apple's transaction identifier, product, date, sandbox/production</td>
-      <td>To unlock Pro and let you restore it later. We never see your card details — Apple handles payment and never shares them with us.</td>
+      <td data-label="Examples">Apple's transaction identifier, product, date, sandbox/production</td>
+      <td data-label="Why">To unlock Pro and let you restore it later. We never see your card details — Apple handles payment and never shares them with us.</td>
     </tr>
   </tbody>
 </table>
@@ -258,23 +266,23 @@
   <tbody>
     <tr>
       <td><strong>Supabase</strong> (hosting and database)</td>
-      <td>Everything described above</td>
-      <td>Our database, authentication and server functions</td>
+      <td data-label="What it receives">Everything described above</td>
+      <td data-label="Why">Our database, authentication and server functions</td>
     </tr>
     <tr>
       <td><strong>Google Places API</strong></td>
-      <td>The <em>charger's</em> coordinates — not yours</td>
-      <td>To show cafés and shops near a charger while you wait. We look up the charger's surroundings, so Google never receives your position from us. Results are cached so we don't ask repeatedly.</td>
+      <td data-label="What it receives">The <em>charger's</em> coordinates — not yours</td>
+      <td data-label="Why">To show cafés and shops near a charger while you wait. We look up the charger's surroundings, so Google never receives your position from us. Results are cached so we don't ask repeatedly.</td>
     </tr>
     <tr>
       <td><strong>Apple</strong></td>
-      <td>Purchase transactions; Sign in with Apple if you use it</td>
-      <td>Payment and optional sign-in. Apple's own privacy policy applies.</td>
+      <td data-label="What it receives">Purchase transactions; Sign in with Apple if you use it</td>
+      <td data-label="Why">Payment and optional sign-in. Apple's own privacy policy applies.</td>
     </tr>
     <tr>
       <td><strong>jsDelivr</strong> (open-source CDN)</td>
-      <td>A car manufacturer name (e.g. &ldquo;tesla&rdquo;) and, as with any web request, your IP address</td>
-      <td>To fetch the manufacturer logo shown on your car. Cached on your phone after the first fetch. No account or location data is sent.</td>
+      <td data-label="What it receives">A car manufacturer name (e.g. &ldquo;tesla&rdquo;) and, as with any web request, your IP address</td>
+      <td data-label="Why">To fetch the manufacturer logo shown on your car. Cached on your phone after the first fetch. No account or location data is sent.</td>
     </tr>
   </tbody>
 </table>
@@ -285,6 +293,13 @@
   No Google Analytics, no Facebook SDK, no advertising identifier, no cross-app tracking.
   We do not sell or rent personal data to anyone, and we do not share it for anyone
   else's marketing.
+</p>
+<p>
+  There are two other situations where data could leave our hands, and we'd rather
+  name them than leave them implied. If Wasla is ever sold or merged into another
+  business, your data would transfer with it — we'll tell you before that happens and
+  the new owner would be bound by this policy until you're told otherwise. And we may
+  disclose data if a UAE court or regulator lawfully requires it.
 </p>
 
 <h2>Where your data is kept</h2>
